@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
 const cores = {
-  branca: '#333',
-  verde: '#111',
-  cinza: '#EEEEEE',
-  preta: '#10AC84'
+  branca: '#eee',
+  verde: '#10AC84',
+  cinza: '#333',
+  preta: '#111'
 }
 
 export const GlobalCss = createGlobalStyle`
@@ -16,6 +16,7 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.preta}
+    background-color: ${cores.preta};
+    color: ${cores.branca};
   }
 `
