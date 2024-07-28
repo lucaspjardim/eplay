@@ -1,20 +1,54 @@
 import Banner from '../../components/Banner'
 import ProductsList from '../../components/ProductsList'
+import { useEffect, useState } from 'react'
 
 import resident from '../../assets/images/resident.png'
 import starWars from '../../assets/images/star_wars.png'
 import zelda from '../../assets/images/zelda.png'
 import diablo from '../../assets/images/diablo.png'
 
-import { useState } from 'react'
+export interface GalleryItem {
+  type: 'imagem' | 'video'
+  url: string
+}
 
-type Game = {
-  id: number;
+export type Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: number
+  prices: {
+    discount?: number
+    old?: number
+    current?: number
+  }
+  details: {
+    category: string
+    system: string
+    developer: string
+    publisher: string
+    languages: string[]
+  }
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
 }
 
 const Home = () => {
-  const [promocoes, setPromocoes] = useState([])
-  const [emBreve, setEmBreve] = useState([])
+  const [promocoes, setPromocoes] = useState<Game[]>([])
+  const [emBreve, setEmBreve] = useState<Game[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/promocoes')
+      .then((res) => res.json())
+      .then((res) => setPromocoes(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/em-breve')
+      .then((res) => res.json())
+      .then((res) => setEmBreve(res))
+  }, [])
 
   return (
     <>

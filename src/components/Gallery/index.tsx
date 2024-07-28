@@ -9,11 +9,7 @@ import modal from '../../assets/images/modal.png'
 
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 import { useState } from 'react'
-
-interface GalleryItem {
-  type: 'imagem' | 'video'
-  url: string
-}
+import { GalleryItem } from '../../pages/Home'
 
 const mock: GalleryItem[] = [
   {
