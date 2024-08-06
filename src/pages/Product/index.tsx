@@ -18,7 +18,7 @@ const Product = () => {
     fetch(`https://fake-api-tau.vercel.app/api/eplay/destaque`)
       .then((res) => res.json())
       .then((res) => setGame(res))
-  })
+  }, [])
 
   if (!game) {
     return <h3>Carregando...</h3>
@@ -26,7 +26,7 @@ const Product = () => {
 
   return (
     <>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
         <p>{game.description}</p>
       </Section>
@@ -39,7 +39,11 @@ const Product = () => {
           {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery name="Jogo teste" defaultCover={residentEvil} />
+      <Gallery
+        name={game.name}
+        defaultCover={game.media.cover}
+        items={game.media.gallery}
+      />
     </>
   )
 }

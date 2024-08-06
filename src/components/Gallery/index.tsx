@@ -5,7 +5,6 @@ import spiderman from '../../assets/images/star_wars.png'
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
 import fechar from '../../assets/images/fechar.png'
-import modal from '../../assets/images/modal.png'
 
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 import { useState } from 'react'
@@ -29,20 +28,19 @@ const mock: GalleryItem[] = [
 type Props = {
   defaultCover: string
   name: string
+  items: GalleryItem[]
 }
 
 interface ModalState extends GalleryItem {
   isVisible: boolean
 }
 
-const Gallery = ({ defaultCover, name }: Props) => {
+const Gallery = ({ defaultCover, name, items }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
     type: 'imagem',
     url: ''
   })
-  const [modalEstaAberto, setModalEstaAberto] = useState(false)
-  const [modalUrl, setModalUrl] = useState('')
   const getMediaCover = (item: GalleryItem) => {
     if (item.type === 'imagem') return item.url
     return defaultCover
@@ -65,7 +63,7 @@ const Gallery = ({ defaultCover, name }: Props) => {
     <>
       <Section title="Galeria" background="black">
         <Items>
-          {mock.map((media, index) => (
+          {items.map((media, index) => (
             <Item
               key={media.url}
               onClick={() => {
